@@ -1,0 +1,481 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://scenes/scene.gd" type="Script" id=1]
+[ext_resource path="res://assets/gfx/Bushes.png" type="Texture" id=2]
+[ext_resource path="res://assets/gfx/Tree.png" type="Texture" id=3]
+[ext_resource path="res://presets/tent/tent.tscn" type="PackedScene" id=4]
+[ext_resource path="res://presets/fire/fire.tscn" type="PackedScene" id=5]
+[ext_resource path="res://presets/player/player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://presets/player/Camera2D.gd" type="Script" id=7]
+[ext_resource path="res://presets/hud/HUD.tscn" type="PackedScene" id=8]
+[ext_resource path="res://presets/boat/boat.tscn" type="PackedScene" id=9]
+[ext_resource path="res://presets/shaders/water.shader" type="Shader" id=10]
+[ext_resource path="res://icon.png" type="Texture" id=11]
+[ext_resource path="res://presets/tiles/tileset.tres" type="TileSet" id=12]
+[ext_resource path="res://presets/shaders/fog.shader" type="Shader" id=13]
+[ext_resource path="res://assets/gfx/Controls/left.png" type="Texture" id=14]
+[ext_resource path="res://assets/gfx/Controls/left_pressed.png" type="Texture" id=15]
+[ext_resource path="res://assets/gfx/Controls/right.png" type="Texture" id=16]
+[ext_resource path="res://assets/gfx/Controls/right_pressed.png" type="Texture" id=17]
+[ext_resource path="res://assets/gfx/Controls/up.png" type="Texture" id=18]
+[ext_resource path="res://assets/gfx/Controls/up_pressed.png" type="Texture" id=19]
+[ext_resource path="res://assets/gfx/Controls/echo.png" type="Texture" id=20]
+[ext_resource path="res://assets/gfx/Controls/echo_pressed.png" type="Texture" id=21]
+[ext_resource path="res://assets/sfx/wind_woosh_loop.ogg" type="AudioStream" id=22]
+[ext_resource path="res://assets/sfx/myuu_the_order.ogg" type="AudioStream" id=23]
+
+[sub_resource type="SegmentShape2D" id=1]
+a = Vector2( 2.11609, -69.5365 )
+b = Vector2( 3, 227 )
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 10 )
+shader_param/blue_tint = Color( 0, 0, 0, 1 )
+shader_param/sprite_scale = Vector2( 2, 4 )
+shader_param/scale_x = 0.67
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 13 )
+shader_param/color = Vector3( 0.9, 0.9, 0.9 )
+shader_param/octives = 4
+shader_param/scale_value = 0.4
+shader_param/coordinate_movement = 3.0
+
+[node name="Node" type="Node2D"]
+position = Vector2( 0.286621, 0.0717906 )
+script = ExtResource( 1 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.513726, 0.498039, 0.619608, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Background" type="Node2D" parent="."]
+editor/display_folded = true
+position = Vector2( -494.329, 177.869 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Bushes" type="Sprite" parent="Background"]
+modulate = Color( 0.433594, 0.433594, 0.433594, 1 )
+position = Vector2( -159.927, 97.4846 )
+texture = ExtResource( 2 )
+
+[node name="Jungle" type="Node2D" parent="Background"]
+editor/display_folded = true
+position = Vector2( -730.427, -70.6675 )
+scale = Vector2( 1.02013, 1.06496 )
+
+[node name="Tree11" type="Sprite" parent="Background/Jungle"]
+modulate = Color( 0.588235, 0.588235, 0.588235, 1 )
+position = Vector2( 24.9834, 60.633 )
+scale = Vector2( 3.3643, 3.22268 )
+texture = ExtResource( 3 )
+
+[node name="Tree12" type="Sprite" parent="Background/Jungle"]
+modulate = Color( 0.588235, 0.588235, 0.588235, 1 )
+position = Vector2( -2.86572, 61.6397 )
+scale = Vector2( 3.3643, 3.22268 )
+texture = ExtResource( 3 )
+
+[node name="Tree13" type="Sprite" parent="Background/Jungle"]
+modulate = Color( 0.588235, 0.588235, 0.588235, 1 )
+position = Vector2( 11.3214, 62.4786 )
+scale = Vector2( 3.3643, 3.22268 )
+texture = ExtResource( 3 )
+
+[node name="Tree10" type="Sprite" parent="Background/Jungle"]
+modulate = Color( 0.8, 0.8, 0.8, 1 )
+position = Vector2( 31.9979, 95.9264 )
+scale = Vector2( 2.68075, 2.5679 )
+texture = ExtResource( 3 )
+
+[node name="Tree9" type="Sprite" parent="Background/Jungle"]
+modulate = Color( 0.878431, 0.878431, 0.878431, 1 )
+position = Vector2( 96.5886, 113.312 )
+scale = Vector2( 1.95577, 1.87344 )
+texture = ExtResource( 3 )
+
+[node name="Tree8" type="Sprite" parent="Background/Jungle"]
+position = Vector2( 58.9042, 129.411 )
+scale = Vector2( 1.33091, 1.27488 )
+texture = ExtResource( 3 )
+
+[node name="Bushes2" type="Sprite" parent="Background/Jungle"]
+modulate = Color( 0.588235, 0.588235, 0.588235, 1 )
+position = Vector2( 37.076, 148.164 )
+scale = Vector2( 1.41333, 1.35383 )
+texture = ExtResource( 2 )
+
+[node name="Bushes" type="Sprite" parent="Background/Jungle"]
+position = Vector2( 24.6399, 147.514 )
+scale = Vector2( 1.41333, 1.35383 )
+texture = ExtResource( 2 )
+
+[node name="Bushes4" type="Sprite" parent="Background/Jungle"]
+modulate = Color( 0.588235, 0.588235, 0.588235, 1 )
+position = Vector2( 75.3248, 155.148 )
+scale = Vector2( 0.867294, 0.830785 )
+texture = ExtResource( 2 )
+
+[node name="Bushes5" type="Sprite" parent="Background/Jungle"]
+position = Vector2( 58.5593, 154.753 )
+scale = Vector2( 0.867294, 0.830785 )
+texture = ExtResource( 2 )
+
+[node name="Extras" type="Node2D" parent="."]
+editor/display_folded = true
+
+[node name="Limit2" type="StaticBody2D" parent="Extras"]
+editor/display_folded = true
+position = Vector2( -1215.86, 107.201 )
+scale = Vector2( 1.02013, 1.06496 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Extras/Limit2"]
+position = Vector2( 1786.44, 31.2058 )
+shape = SubResource( 1 )
+
+[node name="Limit" type="StaticBody2D" parent="Extras"]
+editor/display_folded = true
+position = Vector2( -1215.86, 107.201 )
+scale = Vector2( 1.02013, 1.06496 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Extras/Limit"]
+position = Vector2( 65.2466, -20.9991 )
+shape = SubResource( 1 )
+
+[node name="Tent" parent="." instance=ExtResource( 4 )]
+position = Vector2( -894.012, 247.493 )
+
+[node name="Fire" parent="." instance=ExtResource( 5 )]
+position = Vector2( -942.622, 269.701 )
+
+[node name="SpawnLoc" type="Position2D" parent="."]
+position = Vector2( -1003.89, 244.906 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PlayerSpawnLoc" type="Position2D" parent="."]
+position = Vector2( 559.289, 233.002 )
+
+[node name="Player" parent="." groups=[
+"group_player",
+] instance=ExtResource( 6 )]
+editor/display_folded = true
+position = Vector2( -1065.55, 267.377 )
+
+[node name="Camera" type="Camera2D" parent="Player"]
+position = Vector2( 0, -25 )
+current = true
+zoom = Vector2( 0.5, 0.5 )
+process_mode = 0
+limit_left = -1260
+limit_right = 930
+limit_bottom = 650
+limit_smoothed = true
+smoothing_enabled = true
+smoothing_speed = 3.0
+offset_v = -0.5
+drag_margin_left = 0.05
+drag_margin_right = 0.05
+editor_draw_limits = true
+editor_draw_drag_margin = true
+script = ExtResource( 7 )
+
+[node name="Tween" type="Tween" parent="Player/Camera"]
+
+[node name="HUD" parent="Player/Camera" instance=ExtResource( 8 )]
+
+[node name="Foreground" type="Node2D" parent="."]
+editor/display_folded = true
+light_mask = 2
+position = Vector2( -335.235, -33.2551 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Tree7" type="Sprite" parent="Foreground"]
+position = Vector2( -327.953, 280.003 )
+scale = Vector2( 1.3577, 1.3577 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Bushes3" type="Sprite" parent="Foreground"]
+position = Vector2( -330.73, 308.632 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Plants" type="Node2D" parent="Foreground"]
+editor/display_folded = true
+position = Vector2( -0.368835, 0 )
+
+[node name="Bushes4" type="Sprite" parent="Foreground/Plants"]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 969.964, 449.186 )
+scale = Vector2( 0.276382, 5.51363 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Bushes11" type="Sprite" parent="Foreground/Plants"]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1155.89, 472.581 )
+scale = Vector2( 0.276382, 5.51363 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Bushes5" type="Sprite" parent="Foreground/Plants"]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 982.282, 489.133 )
+scale = Vector2( 0.329145, 2.99117 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Bushes12" type="Sprite" parent="Foreground/Plants"]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1168.21, 512.528 )
+scale = Vector2( 0.329145, 2.99117 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Bushes6" type="Sprite" parent="Foreground/Plants"]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1024.84, 501.535 )
+scale = Vector2( 0.329145, 2.36055 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Bushes10" type="Sprite" parent="Foreground/Plants"]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1210.77, 524.93 )
+scale = Vector2( 0.329145, 2.36055 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Bushes8" type="Sprite" parent="Foreground/Plants"]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1099.75, 509.008 )
+rotation = -0.785398
+scale = Vector2( 0.352345, 2.70078 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Bushes9" type="Sprite" parent="Foreground/Plants"]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 963.457, 389.183 )
+rotation = 6.80678
+scale = Vector2( 0.352345, 2.70078 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Bushes14" type="Sprite" parent="Foreground/Plants"]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 958.766, 342.65 )
+rotation = 7.50173
+scale = Vector2( 0.352345, 2.70078 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Bushes7" type="Sprite" parent="Foreground/Plants"]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1055.36, 476.946 )
+scale = Vector2( 0.329145, 3.94726 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Bushes13" type="Sprite" parent="Foreground/Plants"]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1241.29, 500.341 )
+scale = Vector2( 0.329145, 3.94726 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Boat" parent="Foreground" instance=ExtResource( 9 )]
+position = Vector2( 988.261, 278.47 )
+z_index = -1
+
+[node name="Water" type="Sprite" parent="Foreground"]
+visible = false
+material = SubResource( 2 )
+position = Vector2( 1022.83, 490 )
+scale = Vector2( 5.15127, 3.5 )
+texture = ExtResource( 11 )
+offset = Vector2( 15.7046, -16.0904 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Tiles" type="Node2D" parent="." groups=[
+"Tiles",
+]]
+editor/display_folded = true
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="TileMap" type="TileMap" parent="Tiles"]
+tile_set = ExtResource( 12 )
+cell_size = Vector2( 31, 31 )
+cell_clip_uv = true
+format = 1
+tile_data = PoolIntArray( 655319, 536870912, 0, 655320, 3, 0, 655321, 2, 0, 655322, 3, 0, 655323, 3, 0, 655324, 3, 0, 655325, 3, 0, 655326, 3, 0, 655327, 3, 0, 655328, 3, 0, 655329, 3, 0, 655330, 2, 0, 655331, 2, 0, 655332, 3, 0, 655333, 2, 0, 655334, 2, 0, 655335, 2, 0, 655336, 2, 0, 655337, 3, 0, 655338, 3, 0, 655339, 3, 0, 655340, 2, 0, 655341, 3, 0, 655342, 3, 0, 655343, 3, 0, 655344, 3, 0, 655345, 3, 0, 655346, 3, 0, 655347, 3, 0, 655348, 3, 0, 655349, 2, 0, 655350, 3, 0, 655351, 3, 0, 655352, 2, 0, 655353, 3, 0, 655354, 3, 0, 655355, 3, 0, 655356, 2, 0, 655357, 3, 0, 655358, 2, 0, 655359, 3, 0, 589824, 3, 0, 589825, 2, 0, 589826, 2, 0, 589827, 2, 0, 589828, 3, 0, 589829, 2, 0, 589830, 3, 0, 589831, 3, 0, 589832, 3, 0, 589833, 3, 0, 589834, 3, 0, 589835, 3, 0, 589836, 2, 0, 589837, 3, 0, 589838, 2, 0, 589839, 3, 0, 589840, 536870915, 0, 589841, 2, 0, 589842, 2, 0, 589843, 0, 0, 720855, 536870916, 0, 720856, 1, 0, 720857, 1, 0, 720858, 1, 0, 720859, 1, 0, 720860, 1, 0, 720861, 1, 0, 720862, 1, 0, 720863, 1, 0, 720864, 1, 0, 720865, 1, 0, 720866, 1, 0, 720867, 1, 0, 720868, 1, 0, 720869, 1, 0, 720870, 1, 0, 720871, 1, 0, 720872, 1, 0, 720873, 1, 0, 720874, 1, 0, 720875, 1, 0, 720876, 1, 0, 720877, 1, 0, 720878, 1, 0, 720879, 1, 0, 720880, 1, 0, 720881, 1, 0, 720882, 1, 0, 720883, 1, 0, 720884, 1, 0, 720885, 1, 0, 720886, 1, 0, 720887, 1, 0, 720888, 1, 0, 720889, 1, 0, 720890, 1, 0, 720891, 1, 0, 720892, 1, 0, 720893, 1, 0, 720894, 1, 0, 720895, 1, 0, 655360, 1, 0, 655361, 1, 0, 655362, 1, 0, 655363, 1, 0, 655364, 1, 0, 655365, 1, 0, 655366, 1, 0, 655367, 1, 0, 655368, 1, 0, 655369, 1, 0, 655370, 1, 0, 655371, 1, 0, 655372, 1, 0, 655373, 1, 0, 655374, 1, 0, 655375, 1, 0, 655376, 1, 0, 655377, 1, 0, 655378, 1, 0, 655379, 4, 0, 786391, 1610612740, 0, 786392, 1, 0, 786393, 1, 0, 786394, 1, 0, 786395, 1, 0, 786396, 1, 0, 786397, 1, 0, 786398, 1, 0, 786399, 1, 0, 786400, 1, 0, 786401, 1, 0, 786402, 1, 0, 786403, 1, 0, 786404, 1, 0, 786405, 1, 0, 786406, 1, 0, 786407, 1, 0, 786408, 1, 0, 786409, 1, 0, 786410, 1, 0, 786411, 1, 0, 786412, 1, 0, 786413, 1, 0, 786414, 1, 0, 786415, 1, 0, 786416, 1, 0, 786417, 1, 0, 786418, 1, 0, 786419, 1, 0, 786420, 1, 0, 786421, 1, 0, 786422, 1, 0, 786423, 1, 0, 786424, 1, 0, 786425, 1, 0, 786426, 1, 0, 786427, 1, 0, 786428, 1, 0, 786429, 1, 0, 786430, 1, 0, 786431, 1, 0, 720896, 1, 0, 720897, 1, 0, 720898, 1, 0, 720899, 1, 0, 720900, 1, 0, 720901, 1, 0, 720902, 1, 0, 720903, 1, 0, 720904, 1, 0, 720905, 1, 0, 720906, 1, 0, 720907, 1, 0, 720908, 1, 0, 720909, 1, 0, 720910, 1, 0, 720911, 1, 0, 720912, 1, 0, 720913, 1, 0, 720914, 1, 0, 720915, 4, 0, 851927, 1610612740, 0, 851928, 1, 0, 851929, 1, 0, 851930, 1, 0, 851931, 1, 0, 851932, 1, 0, 851933, 1, 0, 851934, 1, 0, 851935, 1, 0, 851936, 1, 0, 851937, 1, 0, 851938, 1, 0, 851939, 1, 0, 851940, 1, 0, 851941, 1, 0, 851942, 1, 0, 851943, 1, 0, 851944, 1, 0, 851945, 1, 0, 851946, 1, 0, 851947, 1, 0, 851948, 1, 0, 851949, 1, 0, 851950, 1, 0, 851951, 1, 0, 851952, 1, 0, 851953, 1, 0, 851954, 1, 0, 851955, 1, 0, 851956, 1, 0, 851957, 1, 0, 851958, 1, 0, 851959, 1, 0, 851960, 1, 0, 851961, 1, 0, 851962, 1, 0, 851963, 1, 0, 851964, 1, 0, 851965, 1, 0, 851966, 1, 0, 851967, 1, 0, 786432, 1, 0, 786433, 1, 0, 786434, 1, 0, 786435, 1, 0, 786436, 1, 0, 786437, 1, 0, 786438, 1, 0, 786439, 1, 0, 786440, 1, 0, 786441, 1, 0, 786442, 1, 0, 786443, 1, 0, 786444, 1, 0, 786445, 1, 0, 786446, 1, 0, 786447, 1, 0, 786448, 1, 0, 786449, 1, 0, 786450, 1, 0, 786451, 4, 0, 917463, 1610612740, 0, 917464, 1, 0, 917465, 1, 0, 917466, 1, 0, 917467, 1, 0, 917468, 1, 0, 917469, 1, 0, 917470, 1, 0, 917471, 1, 0, 917472, 1, 0, 917473, 1, 0, 917474, 1, 0, 917475, 1, 0, 917476, 1, 0, 917477, 1, 0, 917478, 1, 0, 917479, 1, 0, 917480, 1, 0, 917481, 1, 0, 917482, 1, 0, 917483, 1, 0, 917484, 1, 0, 917485, 1, 0, 917486, 1, 0, 917487, 1, 0, 917488, 1, 0, 917489, 1, 0, 917490, 1, 0, 917491, 1, 0, 917492, 1, 0, 917493, 1, 0, 917494, 1, 0, 917495, 1, 0, 917496, 1, 0, 917497, 1, 0, 917498, 1, 0, 917499, 1, 0, 917500, 1, 0, 917501, 1, 0, 917502, 1, 0, 917503, 1, 0, 851968, 1, 0, 851969, 1, 0, 851970, 1, 0, 851971, 1, 0, 851972, 1, 0, 851973, 1, 0, 851974, 1, 0, 851975, 1, 0, 851976, 1, 0, 851977, 1, 0, 851978, 1, 0, 851979, 1, 0, 851980, 1, 0, 851981, 1, 0, 851982, 1, 0, 851983, 1, 0, 851984, 1, 0, 851985, 1, 0, 851986, 1, 0, 851987, 4, 0, 917519, 1, 0, 917520, 1, 0, 917521, 1, 0, 917522, 1, 0, 917523, 4, 0, 983055, 1, 0, 983056, 1, 0, 983057, 1, 0, 983058, 1, 0, 983059, 4, 0, 1048591, 1, 0, 1048592, 1, 0, 1048593, 1, 0, 1048594, 1, 0, 1048595, 5, 0, 1048596, 2, 0, 1048597, 3, 0, 1048598, 536870915, 0, 1048599, 2, 0, 1048600, 2, 0, 1048601, 2, 0, 1048602, 2, 0, 1048603, 2, 0, 1048604, 2, 0, 1048605, 2, 0, 1114127, 1, 0, 1114128, 1, 0, 1114129, 1, 0, 1114130, 1, 0, 1114131, 1, 0, 1114132, 1, 0, 1114133, 1, 0, 1114134, 1, 0, 1114135, 1, 0, 1114136, 1, 0, 1114137, 1, 0, 1114138, 1, 0, 1114139, 1, 0, 1114140, 1, 0, 1114141, 1, 0, 1179663, 1, 0, 1179664, 1, 0, 1179665, 1, 0, 1179666, 1, 0, 1179667, 1, 0, 1179668, 1, 0, 1179669, 1, 0, 1179670, 1, 0, 1179671, 1, 0, 1179672, 1, 0, 1179673, 1, 0, 1179674, 1, 0, 1179675, 1, 0, 1179676, 1, 0, 1179677, 1, 0, 1245199, 1, 0, 1245200, 1, 0, 1245201, 1, 0, 1245202, 1, 0, 1245203, 1, 0, 1245204, 1, 0, 1245205, 1, 0, 1245206, 1, 0, 1245207, 1, 0, 1245208, 1, 0, 1245209, 1, 0, 1245210, 1, 0, 1245211, 1, 0, 1245212, 1, 0, 1245213, 1, 0, 1310735, 1, 0, 1310736, 1, 0, 1310737, 1, 0, 1310738, 1, 0, 1310739, 1, 0, 1310740, 1, 0, 1310741, 1, 0, 1310742, 1, 0, 1310743, 1, 0, 1310744, 1, 0, 1310745, 1, 0, 1310746, 1, 0, 1310747, 1, 0, 1310748, 1, 0, 1310749, 1, 0 )
+
+[node name="Foreground 2" type="Node2D" parent="."]
+editor/display_folded = true
+position = Vector2( -1.83179, 2.06409 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Fog" type="Sprite" parent="Foreground 2"]
+visible = false
+light_mask = 2
+material = SubResource( 3 )
+scale = Vector2( 40, 40 )
+texture = ExtResource( 11 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="GUI" type="CanvasLayer" parent="."]
+editor/display_folded = true
+
+[node name="left_inputs" type="Node2D" parent="GUI"]
+editor/display_folded = true
+position = Vector2( -20.167, 159.213 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Left" type="TouchScreenButton" parent="GUI/left_inputs"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( 40, 275 )
+scale = Vector2( 2, 2 )
+normal = ExtResource( 14 )
+pressed = ExtResource( 15 )
+action = "ui_left"
+visibility_mode = 1
+
+[node name="Right" type="TouchScreenButton" parent="GUI/left_inputs"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( 120, 275 )
+scale = Vector2( 2, 2 )
+normal = ExtResource( 16 )
+pressed = ExtResource( 17 )
+action = "ui_right"
+visibility_mode = 1
+
+[node name="right_inputs" type="Node2D" parent="GUI"]
+editor/display_folded = true
+position = Vector2( -27.597, 164.521 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Up" type="TouchScreenButton" parent="GUI/right_inputs"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( 250, 275 )
+scale = Vector2( 2, 2 )
+normal = ExtResource( 18 )
+pressed = ExtResource( 19 )
+action = "ui_up"
+visibility_mode = 1
+
+[node name="Echo" type="TouchScreenButton" parent="GUI/right_inputs"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( 210, 240 )
+scale = Vector2( 1.5, 1.5 )
+normal = ExtResource( 20 )
+pressed = ExtResource( 21 )
+action = "ui_select"
+visibility_mode = 1
+
+[node name="fogg" type="CheckButton" parent="GUI"]
+self_modulate = Color( 0.556863, 0.556863, 0.556863, 1 )
+anchor_right = 0.25
+margin_left = 4.0
+margin_right = 225.0
+margin_bottom = 40.0
+focus_mode = 0
+shortcut_in_tooltip = false
+pressed = true
+enabled_focus_mode = 0
+text = "Shadder"
+flat = true
+clip_text = true
+align = 2
+
+[node name="sound" type="CheckButton" parent="GUI"]
+self_modulate = Color( 0.556863, 0.556863, 0.556863, 1 )
+anchor_right = 0.25
+margin_left = 4.0
+margin_top = 38.9107
+margin_right = 225.0
+margin_bottom = 78.9107
+focus_mode = 0
+shortcut_in_tooltip = false
+pressed = true
+enabled_focus_mode = 0
+text = "Sound"
+flat = true
+clip_text = true
+align = 2
+
+[node name="Ambience" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 22 )
+volume_db = -20.0
+mix_target = 1
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 23 )
+volume_db = -20.0
+mix_target = 2
