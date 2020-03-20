@@ -2,7 +2,8 @@
 
 [ext_resource path="res://presets/fire/fire.gd" type="Script" id=1]
 [ext_resource path="res://assets/gfx/Moon.png" type="Texture" id=2]
-[ext_resource path="res://presets/fire/fire.png" type="Texture" id=3]
+[ext_resource path="res://assets/gfx/fire.png" type="Texture" id=3]
+
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 12.3824

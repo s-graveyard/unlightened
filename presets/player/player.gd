@@ -16,38 +16,23 @@ var anim_next = ""
 var input_states = preload("res://presets/controls/inputstates.gd")
 var btn_right = input_states.new("ui_right")
 var btn_left = input_states.new("ui_left")
-var btn_jump = input_states.new("ui_up")
-var btn_throw = input_states.new("ui_select")
 
 # Used for loop playing animation.
 func _animation(delta):
 	if anim_next != anim_current:
 		anim_current = anim_next
-		$Sprite.get_node("anim").play(anim_next)
+		$Body/Sprite.get_node("anim").play(anim_next)
 
-const step_sounds = ["StepGrassLeft","StepGrassRight"]
+const step_musics = ["StepGrassLeft","StepGrassRight"]
 func play_walk():
-	if game.enable_sound:
-		var random_walk = get_node(step_sounds[randi() % 2])
-		if grounded && not random_walk.is_playing():
-			random_walk.play()
-	pass
+	var random_walk = get_node(step_musics[randi() % 2])
+	if grounded && not random_walk.is_playing():
+		random_walk.play()
 
-const jump_sounds = ["JumpLeft","JumpRight"]
-func play_jump():
-	if game.enable_sound:
-		if last_action == "Jump":
-			get_node("JumpLand").play()
-		else:
-			get_node(jump_sounds[randi() % 2]).play()
-	pass
-			
-const damage_sounds = ["Pain1","Pain2"]
+const damage_musics = ["Pain1","Pain2"]
 func got_damage():
-	if game.enable_sound:
-		var random_damage = get_node(damage_sounds[randi() % 2])
-		random_damage.play()
-	pass
+	var random_damage = get_node(damage_musics[randi() % 2])
+	random_damage.play()
 
 func _physics_process(delta):
 	
@@ -58,11 +43,11 @@ func _physics_process(delta):
 	# Left/Right movement for key press
 	if btn_left.check() == 2:
 		input_direction = -1
-		$Sprite.flip_h = true
+		$Body/Sprite.flip_h = true
 		play_walk()
 	elif btn_right.check() == 2:
 		input_direction = 1
-		$Sprite.flip_h = false
+		$Body/Sprite.flip_h = false
 		play_walk()
 	else:
 		input_direction = 0
@@ -96,23 +81,5 @@ func _physics_process(delta):
 	if speed.y == 0:
 		grounded = true
 
-	if grounded:
-		if last_action == "Jump":
-			play_jump()
-			last_action = "Idle"
-			
-			emit_signal("player_state", true)
-			
-		if btn_throw.check() == 1:
-			var x_position = position.x + 100 * -direction
-			emit_signal("throw_item", Vector2(x_position, position.y))
-
-		if btn_jump.check() == 1:
-			speed.y = -game.JUMP_FORCE
-			anim_next = "Idle"
-			grounded = false
-			play_jump()
-			last_action = "Jump"
-	
 	# Play Animation
 	self._animation(delta)

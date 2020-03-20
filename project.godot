@@ -42,10 +42,10 @@ game="*res://main/game.gd"
 
 [display]
 
-window/size/width=300
-window/size/height=512
+window/size/width=512
+window/size/height=300
 window/dpi/allow_hidpi=true
-window/handheld/orientation="portrait"
+window/handheld/orientation="sensor_landscape"
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 window/stretch/shrink="1"
@@ -79,5 +79,4 @@ ui_end={
 
 [rendering]
 
-environment/default_clear_color=Color( 0.807843, 0.807843, 0.807843, 1 )
-environment/default_environment="res://default_env.tres"
+environment/default_clear_color=Color( 0.0627451, 0.113725, 0.176471, 1 )

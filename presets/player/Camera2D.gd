@@ -1,7 +1,7 @@
 extends Camera2D
 class_name ShakeCamera2D
 
-const LOOK_AHEAD_FACTOR = 0.2
+const LOOK_AHEAD_FACTOR = 0
 const SHIFT_TRANS = Tween.TRANS_SINE
 const SHIFT_EASE = Tween.EASE_OUT
 const SHIFT_DURATION = 0.5
@@ -38,14 +38,14 @@ func _process(delta):
 		
 func shake():
 	var amount = pow(trauma, trauma_power)
-	noise_y += 2
+	noise_y += 0.5
 	
 	# Using noise
 	rotation = max_roll * amount * noise.get_noise_2d(noise.seed, noise_y)
 	offset.x = max_offset.x * amount * noise.get_noise_2d(noise.seed*2, noise_y)
 
 func add_trauma(amount):
-	trauma = min(trauma + amount, 1.0)
+	trauma = min(trauma + amount, 0.5)
 	
 func _check_facing():
 	var new_facing = sign(get_camera_position().x - prev_camera_pos.x)
