@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/leaves_rustling.ogg-5920d472305371a1ced9c7e30f08c4f5.oggstr"
+
+[deps]
+
+source_file="res://assets/sfx/leaves_rustling.ogg"
+dest_files=[ "res://.import/leaves_rustling.ogg-5920d472305371a1ced9c7e30f08c4f5.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

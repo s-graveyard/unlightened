@@ -3,7 +3,7 @@ extends Node
 const FLOOR_NORMAL = Vector2(0, -1)
 const GRAVITY = 1000
 
-const MAX_SPEED = 60
+const MAX_SPEED = 80
 const ACCELERATION = 400
 const DECELERATION = 400
 

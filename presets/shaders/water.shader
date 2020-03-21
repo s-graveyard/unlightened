@@ -36,7 +36,11 @@ void fragment(){
 	
 	vec2 distort_sum = (distort1 + distort2) / 60.0;
 	
-	vec4 color = textureLod(SCREEN_TEXTURE, SCREEN_UV + distort_sum, 0.0);
+	
+	vec2 uv = SCREEN_UV;
+    float y = 0.75 - uv.y;
+	
+	vec4 color = textureLod(SCREEN_TEXTURE, vec2(uv.x, y) + distort_sum, 0.0);
 	
 	color = mix(color, blue_tint, 0.3);
 	color.rgb = mix(vec3(0.5), color.rgb, 1.4);

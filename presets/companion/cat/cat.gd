@@ -3,6 +3,7 @@ extends KinematicBody2D
 var current_node
 var direction = 1
 var animation
+var canCry = false
 
 func _ready():
 	set_process(true)
@@ -17,18 +18,24 @@ func _process(delta):
 	if(current_body.size() != 0):
 		for tinge in current_body:
 			if(tinge.is_in_group("group_player")):
-				# Play animation
-				if !animation.is_playing():
-					animation.play("stretch")
-
+				
+				canCry = true
+				
 				if(tinge.get_global_position().x < self.get_global_position().x - 16):
 					direction = 0
 				if(tinge.get_global_position().x > self.get_global_position().x + 16):
 					direction = 1
-
+			else:
+				canCry = false
+	
 	if(direction == 0):
 		current_node.set_flip_h(false)
 	else:
 		current_node.set_flip_h(true)
-
+		
+	if !animation.is_playing():
+		if not canCry:
+			animation.play("idle")
+#		else:
+#			animation.play("stretch")
 	pass

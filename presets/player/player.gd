@@ -23,11 +23,11 @@ func _animation(delta):
 		anim_current = anim_next
 		$Body/Sprite.get_node("anim").play(anim_next)
 
-const step_musics = ["StepGrassLeft","StepGrassRight"]
-func play_walk():
-	var random_walk = get_node(step_musics[randi() % 2])
-	if grounded && not random_walk.is_playing():
-		random_walk.play()
+#const step_musics = ["StepGrassLeft","StepGrassRight"]
+#func play_walk():
+#	var random_walk = get_node(step_musics[randi() % 2])
+#	if grounded && not random_walk.is_playing():
+#		random_walk.play()
 
 const damage_musics = ["Pain1","Pain2"]
 func got_damage():
@@ -44,11 +44,11 @@ func _physics_process(delta):
 	if btn_left.check() == 2:
 		input_direction = -1
 		$Body/Sprite.flip_h = true
-		play_walk()
+#		play_walk()
 	elif btn_right.check() == 2:
 		input_direction = 1
 		$Body/Sprite.flip_h = false
-		play_walk()
+#		play_walk()
 	else:
 		input_direction = 0
 		anim_next = "Idle"

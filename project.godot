@@ -34,6 +34,8 @@ _global_script_class_icons={
 
 config/name="Unlightened"
 run/main_scene="res://scenes/level_1.tscn"
+run/low_processor_mode=true
+boot_splash/bg_color=Color( 0.835294, 0.866667, 0.807843, 1 )
 config/icon="res://icon.png"
 
 [autoload]
@@ -44,11 +46,13 @@ game="*res://main/game.gd"
 
 window/size/width=512
 window/size/height=300
+window/size/test_width=512
+window/size/test_height=300
 window/dpi/allow_hidpi=true
+window/vsync/vsync_via_compositor=true
 window/handheld/orientation="sensor_landscape"
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
-window/stretch/shrink="1"
 
 [input]
 
@@ -77,6 +81,24 @@ ui_end={
 "events": [  ]
 }
 
+[physics]
+
+common/physics_fps=80
+2d/physics_engine="GodotPhysics"
+3d/physics_engine="GodotPhysics"
+3d/active_soft_world=false
+
 [rendering]
 
-environment/default_clear_color=Color( 0.0627451, 0.113725, 0.176471, 1 )
+quality/2d/gles2_use_nvidia_rect_flicker_workaround=true
+quality/intended_usage/framebuffer_allocation=0
+quality/intended_usage/framebuffer_allocation.mobile=0
+quality/filters/anisotropic_filter_level=16
+quality/shadows/filter_mode=0
+quality/reflections/texture_array_reflections=false
+quality/reflections/high_quality_ggx=false
+quality/depth_prepass/disable_for_vendors=""
+quality/filters/use_nearest_mipmap_filter=true
+quality/subsurface_scattering/quality=2
+quality/subsurface_scattering/scale=2
+quality/depth/hdr.mobile=true

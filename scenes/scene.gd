@@ -5,30 +5,29 @@ func init_player():
 
 # ------------
 func init_controls():
-	$GUI/music.connect("toggled", self, "on_music_toggle")
-	
+	$World/GUI/music.connect("toggled", self, "on_music_toggle")
 	init_music()
 	pass
 	
 func on_music_toggle(toggle):
-	game.enable_music = toggle
+	game.enable_ambience = toggle
 	
 	init_music()
 	
 # ------------
-func init_music():
-	if game.enable_music:
-		get_node("BackgroundMusic").play()
-	else:
-		get_node("BackgroundMusic").stop()
+func init_shaders():
+	$Foreground/Water/Shader.visible = true
 	
+# ------------
+func init_music():
 	if game.enable_ambience:
-		get_node("Ambience").play()
+		$World/Ambience.play()
 	else:
-		get_node("Ambience").stop()
+		$World/Ambience.stop()
 	
 func _ready():
 	init_controls()
 	init_music()
 	init_player()
+	init_shaders()
 	
