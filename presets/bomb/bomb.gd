@@ -9,7 +9,7 @@ func _on_Area2D_body_entered(body):
 	_on_collision(body)
 
 func _on_collision(body):
-	if body.is_in_group('group_player_body'):
+	if body.is_in_group('group_player'):
 		set_physics_process(false)
 		
 		$Sprite.hide()

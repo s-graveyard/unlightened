@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scenes/scene.gd" type="Script" id=1]
 [ext_resource path="res://assets/gfx/background/sky_1.png" type="Texture" id=2]
@@ -16,6 +16,8 @@
 [ext_resource path="res://assets/sfx/leaves_rustling.ogg" type="AudioStream" id=14]
 [ext_resource path="res://presets/companion/cat/cat.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/gfx/Tower.png" type="Texture" id=16]
+[ext_resource path="res://assets/gfx/Tower2.png" type="Texture" id=17]
+[ext_resource path="res://assets/gfx/indicator.png" type="Texture" id=18]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -50,6 +52,15 @@ shader_param/scale_x = 0.5
 position = Vector2( 0.286621, 0.0717906 )
 script = ExtResource( 1 )
 
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+rect = Rect2( 0, 0, 512, 300 )
+process_parent = true
+physics_process_parent = true
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
 [node name="World" type="Node2D" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
@@ -73,18 +84,14 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="World"]
-rect = Rect2( 0, 0, 512, 300 )
-process_parent = true
-physics_process_parent = true
-__meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
-}
+[node name="Control" type="Sprite" parent="World"]
+z_index = 15
+texture = ExtResource( 18 )
 
 [node name="GUI" type="CanvasLayer" parent="World"]
 
 [node name="left_inputs" type="Node2D" parent="World/GUI"]
+visible = false
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -115,6 +122,7 @@ __meta__ = {
 }
 
 [node name="music" type="CheckButton" parent="World/GUI"]
+visible = false
 self_modulate = Color( 0.556863, 0.556863, 0.556863, 1 )
 anchor_right = 0.25
 margin_right = 385.912
@@ -134,12 +142,12 @@ __meta__ = {
 stream = ExtResource( 14 )
 volume_db = 10.0
 
-[node name="Extras" type="Node2D" parent="."]
+[node name="Limit" type="Node2D" parent="World"]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Limit" type="StaticBody2D" parent="Extras" groups=[
+[node name="Limit" type="StaticBody2D" parent="World/Limit" groups=[
 "group_ground",
 ]]
 position = Vector2( -80.2866, 109.928 )
@@ -148,11 +156,11 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Extras/Limit"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Limit/Limit"]
 position = Vector2( 65.2466, -20.9991 )
 shape = SubResource( 2 )
 
-[node name="Limit2" type="StaticBody2D" parent="Extras" groups=[
+[node name="Limit2" type="StaticBody2D" parent="World/Limit" groups=[
 "group_ground",
 ]]
 position = Vector2( 542.999, 81.943 )
@@ -161,16 +169,15 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Extras/Limit2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Limit/Limit2"]
 position = Vector2( 65.2466, -20.9991 )
 shape = SubResource( 2 )
 
 [node name="Background" type="Node2D" parent="."]
-position = Vector2( -476.355, 179.928 )
 
 [node name="Tower" type="Sprite" parent="Background"]
 self_modulate = Color( 0.866667, 0.866667, 0.866667, 1 )
-position = Vector2( 907.59, -68.4998 )
+position = Vector2( 431.235, 111.428 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 16 )
 __meta__ = {
@@ -179,20 +186,20 @@ __meta__ = {
 }
 
 [node name="Tower2" type="Sprite" parent="Background"]
-position = Vector2( 818.539, 70.4391 )
+position = Vector2( 349.713, 179.928 )
 scale = Vector2( 3, 3 )
-texture = ExtResource( 16 )
+texture = ExtResource( 17 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="Cat" parent="Background" instance=ExtResource( 15 )]
-position = Vector2( 1036.07, -27.9998 )
+position = Vector2( 559.715, 151.928 )
 scale = Vector2( 1.5, 1.5 )
 
 [node name="Plants" type="Node2D" parent="Background"]
-position = Vector2( 158.725, -211.079 )
+position = Vector2( -317.63, -31.151 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -300,10 +307,10 @@ __meta__ = {
 }
 
 [node name="Tree" parent="Background" instance=ExtResource( 3 )]
-position = Vector2( 1036.07, -39.9998 )
+position = Vector2( 559.715, 139.928 )
 
 [node name="PlayerSpawnLoc" type="Position2D" parent="."]
-position = Vector2( 219.713, 199.928 )
+position = Vector2( 488.305, 198.201 )
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
 z_index = 10
