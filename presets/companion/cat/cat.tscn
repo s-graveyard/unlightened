@@ -109,3 +109,5 @@ shape = SubResource( 4 )
 stream = ExtResource( 3 )
 volume_db = -80.0
 max_distance = 200.0
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_Area2D_body_shape_entered"]
+[connection signal="body_shape_exited" from="Area2D" to="." method="_on_Area2D_body_shape_exited"]
