@@ -31,14 +31,14 @@ length = 0.8
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ 8, 9, 10, 11, 12, 13, 14, 15 ]
 }
 tracks/1/type = "audio"
@@ -49,7 +49,7 @@ tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
 "clips": [ {
-"end_offset": 0.0,
+"end_offset": 0.127493,
 "start_offset": 0.0,
 "stream": ExtResource( 8 )
 }, {
@@ -61,10 +61,34 @@ tracks/1/keys = {
 "start_offset": 0.0,
 "stream": null
 } ],
-"times": PoolRealArray( 0.041176, 0.4, 0.8 )
+"times": PoolRealArray( 0.041176, 0.355868, 0.8 )
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../../StepGrassLeft:pitch_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 1.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../../StepGrassLeft:volume_db")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -20.0, -20.0 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "Run"
 length = 0.8
 loop = true
@@ -96,7 +120,31 @@ tracks/1/keys = {
 "start_offset": 0.0,
 "stream": ExtResource( 9 )
 } ],
-"times": PoolRealArray( 0, 0.3 )
+"times": PoolRealArray( 0.0686501, 0.346584 )
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../../StepGrassLeft:pitch_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.8, 0.8 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../../StepGrassLeft:volume_db")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -15.0, -15.0 ]
 }
 
 [sub_resource type="RectangleShape2D" id=4]
@@ -124,7 +172,7 @@ position = Vector2( -9.3068, 11.0226 )
 texture = ExtResource( 2 )
 vframes = 4
 hframes = 8
-frame = 21
+frame = 8
 __meta__ = {
 "_edit_lock_": true
 }
@@ -133,7 +181,7 @@ __meta__ = {
 autoplay = "Idle"
 anims/Idle = SubResource( 1 )
 anims/Move = SubResource( 2 )
-anims/Run = SubResource( 5 )
+anims/Run = SubResource( 3 )
 next/Idle = "Idle"
 blend_times = [ "Move", "Move", 1.0 ]
 
@@ -170,6 +218,7 @@ volume_db = -20.0
 attenuation = 3.03143
 
 [node name="StepGrassLeft" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 9 )
-volume_db = -20.0
-attenuation = 3.03143
+stream = ExtResource( 8 )
+volume_db = -10.0
+max_distance = 500.0
+attenuation = 0.659753
