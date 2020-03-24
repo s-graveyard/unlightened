@@ -13,7 +13,7 @@
 [ext_resource path="res://assets/gfx/Controls/left_pressed.png" type="Texture" id=11]
 [ext_resource path="res://assets/gfx/Controls/right.png" type="Texture" id=12]
 [ext_resource path="res://assets/gfx/Controls/right_pressed.png" type="Texture" id=13]
-[ext_resource path="res://assets/sfx/leaves_rustling.ogg" type="AudioStream" id=14]
+[ext_resource path="res://assets/sfx/summer.ogg" type="AudioStream" id=14]
 [ext_resource path="res://presets/companion/cat/cat.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/gfx/Tower.png" type="Texture" id=16]
 [ext_resource path="res://assets/gfx/Tower2.png" type="Texture" id=17]
@@ -45,8 +45,8 @@ b = Vector2( -4.16711, 224.841 )
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 7 )
 shader_param/blue_tint = Color( 1, 1, 1, 1 )
-shader_param/sprite_scale = Vector2( 10, 20 )
-shader_param/scale_x = 0.5
+shader_param/sprite_scale = Vector2( 10, 10 )
+shader_param/scale_x = 1.0
 
 [node name="Node" type="Node2D"]
 position = Vector2( 0.286621, 0.0717906 )
@@ -319,7 +319,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="Camera" type="Camera2D" parent="Player"]
-position = Vector2( 0, -150 )
+position = Vector2( 0, -100 )
 current = true
 zoom = Vector2( 1.5, 1.5 )
 limit_left = -1260

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/breathe.ogg-e2207db0e31f5fb194280064eec854ea.oggstr"
+
+[deps]
+
+source_file="res://assets/sfx/breathe.ogg"
+dest_files=[ "res://.import/breathe.ogg-e2207db0e31f5fb194280064eec854ea.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
