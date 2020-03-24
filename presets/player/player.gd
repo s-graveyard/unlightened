@@ -17,6 +17,8 @@ var input_states = preload("res://presets/controls/inputstates.gd")
 var btn_right = input_states.new("ui_right")
 var btn_left = input_states.new("ui_left")
 
+var is_running = false
+
 # Used for loop playing animation.
 func _animation(delta):
 	if anim_next != anim_current:
@@ -38,7 +40,7 @@ func _physics_process(delta):
 	
 	if input_direction:
 		direction = input_direction
-		anim_next = "Move"
+		anim_next = "Run" if is_running else "Move"
 		
 	# Left/Right movement for key press
 	if btn_left.check() == 2:
@@ -63,7 +65,15 @@ func _physics_process(delta):
 	else:
 		speed.x -= game.DECELERATION
 	
-	speed.x = clamp(speed.x, 0, game.MAX_SPEED)
+	var max_clamp = game.MAX_SPEED
+	
+	if Input.is_action_pressed("ui_down"):
+		max_clamp *= 1.5
+		is_running = true
+	else:
+		is_running = false
+		
+	speed.x = clamp(speed.x, 0, max_clamp)
 
 	# Apply Gravity
 	speed.y += game.GRAVITY * delta

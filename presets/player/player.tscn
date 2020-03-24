@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://presets/player/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/gfx/player2.png" type="Texture" id=2]
@@ -38,7 +38,7 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
+"update": 0,
 "values": [ 8, 9, 10, 11, 12, 13, 14, 15 ]
 }
 tracks/1/type = "audio"
@@ -61,10 +61,45 @@ tracks/1/keys = {
 "start_offset": 0.0,
 "stream": null
 } ],
-"times": PoolRealArray( 0.041176, 0.398284, 0.8 )
+"times": PoolRealArray( 0.041176, 0.4, 0.8 )
 }
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="Animation" id=5]
+resource_name = "Run"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 16, 17, 18, 19, 20, 21, 22, 23 ]
+}
+tracks/1/type = "audio"
+tracks/1/path = NodePath("../../StepGrassLeft")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 0.0833609,
+"start_offset": 0.0,
+"stream": ExtResource( 8 )
+}, {
+"end_offset": 0.0858127,
+"start_offset": 0.0,
+"stream": ExtResource( 9 )
+} ],
+"times": PoolRealArray( 0, 0.3 )
+}
+
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 8.13984, 25.693 )
 
 [node name="Node" type="KinematicBody2D" groups=[
@@ -89,14 +124,16 @@ position = Vector2( -9.3068, 11.0226 )
 texture = ExtResource( 2 )
 vframes = 4
 hframes = 8
-frame = 8
+frame = 21
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="anim" type="AnimationPlayer" parent="Body/Sprite"]
+autoplay = "Idle"
 anims/Idle = SubResource( 1 )
 anims/Move = SubResource( 2 )
+anims/Run = SubResource( 5 )
 next/Idle = "Idle"
 blend_times = [ "Move", "Move", 1.0 ]
 
@@ -104,7 +141,7 @@ blend_times = [ "Move", "Move", 1.0 ]
 "group_player",
 ]]
 position = Vector2( -2.12236, 2.7513 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="JumpLand" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )

@@ -75,7 +75,7 @@ tracks/2/keys = {
 extents = Vector2( 8, 6 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 40, 60 )
+extents = Vector2( 20, 60 )
 
 [node name="Cat" type="KinematicBody2D"]
 collision_layer = 2
