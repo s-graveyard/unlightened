@@ -12,6 +12,7 @@ func _ready():
 func _process(delta):
 	if collide and Input.is_action_just_pressed("ui_select"):
 		emit_signal("teleport", teleport_position)
+		pass
 	
 func _on_Ladder_body_shape_entered(body_id, body, body_shape, area_shape):
 	if(body.is_in_group("group_player")):

@@ -41,6 +41,7 @@ config/icon="res://icon.png"
 [autoload]
 
 game="*res://main/game.gd"
+SceneManager="*res://scenes/SceneManager.tscn"
 
 [display]
 

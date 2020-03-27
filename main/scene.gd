@@ -1,5 +1,7 @@
 extends Node2D
 
+var indicator = load("res://interractables/indicator/Indicator.tscn")
+
 func _ready():
 	init_controls()
 	init_music()
@@ -13,9 +15,15 @@ func init_elements():
 	if $Background/Cat != null:
 		$Background/Cat.connect("control", self, "on_interaction_control")
 
-	if $Tower_Interior/Ladder != null:
-		$Tower_Interior/Ladder.connect("control", self,"on_interaction_control")
-		$Tower_Interior/Ladder.connect("teleport", self, "teleport_player")
+	if $Background/Tower_Interior/Ladder != null:
+		$Background/Tower_Interior/Ladder.connect("control", self,"on_interaction_control")
+		$Background/Tower_Interior/Ladder.connect("teleport", self, "teleport_player")
+	
+	if $Background/Tower_Interior/Door != null:
+		$Background/Tower_Interior/Door.connect("control", self, "on_interaction_control")
+
+	if $Background/Tower/Door != null:
+		$Background/Tower/Door.connect("control", self, "on_interaction_control")
 # ------------
 func init_controls():
 	$World/GUI/music.connect("toggled", self, "on_music_toggle")
@@ -28,9 +36,15 @@ func on_music_toggle(toggle):
 	init_music()
 	
 func on_interaction_control(state, position):
-	var interactionControl = $World/Control
-	interactionControl.visible = state
+	if not state:
+		for controlChild in $World/Control.get_children():
+			$World/Control.remove_child(controlChild)
+		return
+	
+	var interactionControl = indicator.instance()
 	interactionControl.set_position(position)
+	interactionControl.visible = true
+	$World/Control.add_child(interactionControl)
 
 func teleport_player(position):
 	$Player.position = position

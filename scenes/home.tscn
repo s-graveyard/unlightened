@@ -4,7 +4,6 @@
 [ext_resource path="res://presets/tiles/tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://presets/companion/cat/cat.tscn" type="PackedScene" id=3]
 [ext_resource path="res://presets/player/Camera2D.gd" type="Script" id=4]
-[ext_resource path="res://assets/gfx/indicator.png" type="Texture" id=5]
 [ext_resource path="res://presets/shaders/water.shader" type="Shader" id=6]
 [ext_resource path="res://assets/gfx/Bushes.png" type="Texture" id=7]
 [ext_resource path="res://assets/gfx/Controls/left_pressed.png" type="Texture" id=8]
@@ -16,8 +15,9 @@
 [ext_resource path="res://assets/gfx/background/day.png" type="Texture" id=14]
 [ext_resource path="res://presets/tree/Tree.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/sfx/summer.ogg" type="AudioStream" id=16]
-[ext_resource path="res://scenes/scene.gd" type="Script" id=17]
+[ext_resource path="res://main/scene.gd" type="Script" id=17]
 [ext_resource path="res://presets/player/player.tscn" type="PackedScene" id=18]
+[ext_resource path="res://interractables/door/Door.tscn" type="PackedScene" id=19]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -43,8 +43,8 @@ b = Vector2( -4.16711, 224.841 )
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 6 )
 shader_param/blue_tint = Color( 1, 1, 1, 1 )
-shader_param/sprite_scale = Vector2( 10, 10 )
-shader_param/scale_x = 1.0
+shader_param/sprite_scale = Vector2( 8, 8 )
+shader_param/scale_x = 0.67
 
 [node name="Node" type="Node2D"]
 position = Vector2( 0.286621, 0.0717906 )
@@ -82,10 +82,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Control" type="Sprite" parent="World"]
-visible = false
-z_index = 15
-texture = ExtResource( 5 )
+[node name="Control" type="Node2D" parent="World"]
 
 [node name="GUI" type="CanvasLayer" parent="World"]
 
@@ -175,32 +172,24 @@ shape = SubResource( 2 )
 
 [node name="Tower" type="Sprite" parent="Background"]
 self_modulate = Color( 0.866667, 0.866667, 0.866667, 1 )
-position = Vector2( 431.235, 111.428 )
-scale = Vector2( 3, 3 )
+position = Vector2( 339.713, 99.9282 )
 texture = ExtResource( 10 )
-__meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
-}
+
+[node name="Door" parent="Background/Tower" instance=ExtResource( 19 )]
+position = Vector2( 134, 144 )
+home_indoors = "res://scenes/home_indoors.tscn"
 
 [node name="Tower2" type="Sprite" parent="Background"]
-position = Vector2( 349.713, 179.928 )
+visible = false
+position = Vector2( 349.713, 173.928 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 13 )
 __meta__ = {
-"_edit_group_": true,
 "_edit_lock_": true
 }
-
-[node name="Cat" parent="Background" instance=ExtResource( 3 )]
-position = Vector2( 559.715, 151.928 )
-scale = Vector2( 1.5, 1.5 )
 
 [node name="Plants" type="Node2D" parent="Background"]
 position = Vector2( -317.63, -31.151 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Bushes4" type="Sprite" parent="Background/Plants"]
 position = Vector2( 969.964, 449.186 )
@@ -304,11 +293,16 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Cat" parent="Background" instance=ExtResource( 3 )]
+position = Vector2( 370, 151.92 )
+scale = Vector2( 1.5, 1.5 )
+
 [node name="Tree" parent="Background" instance=ExtResource( 15 )]
-position = Vector2( 559.715, 139.928 )
+position = Vector2( 370, 140 )
+z_index = 1
 
 [node name="PlayerSpawnLoc" type="Position2D" parent="."]
-position = Vector2( 488.305, 198.201 )
+position = Vector2( 469.713, 239.928 )
 
 [node name="Player" parent="." instance=ExtResource( 18 )]
 z_index = 10
@@ -316,7 +310,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="Camera" type="Camera2D" parent="Player"]
-position = Vector2( 0, -100 )
+position = Vector2( 0, -120 )
 current = true
 zoom = Vector2( 1.5, 1.5 )
 limit_left = -1260

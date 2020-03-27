@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://interractables/door/Door.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 20.1071, 37.6127 )
+
+[node name="Door" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 1 )
+
+[node name="Door" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="SpawnPoint" type="Position2D" parent="Door"]
+position = Vector2( 0, -35 )
+[connection signal="body_shape_entered" from="." to="." method="_on_Door_body_shape_entered"]
+[connection signal="body_shape_exited" from="." to="." method="_on_Door_body_shape_exited"]

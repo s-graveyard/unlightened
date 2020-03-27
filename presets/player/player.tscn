@@ -164,6 +164,8 @@ extents = Vector2( 15.8576, 27.2783 )
 [node name="Node" type="KinematicBody2D" groups=[
 "group_player",
 ]]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
@@ -183,7 +185,6 @@ position = Vector2( -9.3068, 11.0226 )
 texture = ExtResource( 2 )
 vframes = 4
 hframes = 8
-frame = 23
 __meta__ = {
 "_edit_lock_": true
 }
@@ -203,7 +204,6 @@ position = Vector2( -2.89503, 4.4337 )
 shape = SubResource( 4 )
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 9 )
 volume_db = -15.0
 pitch_scale = 0.8
 max_distance = 500.0

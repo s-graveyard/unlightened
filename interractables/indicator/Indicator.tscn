@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/gfx/indicator.png" type="Texture" id=1]
+
+[node name="Control" type="Sprite"]
+visible = false
+z_index = 15
+texture = ExtResource( 1 )

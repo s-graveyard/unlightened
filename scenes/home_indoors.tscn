@@ -1,13 +1,12 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://scenes/scene.gd" type="Script" id=1]
+[ext_resource path="res://main/scene.gd" type="Script" id=1]
 [ext_resource path="res://assets/gfx/background/night.png" type="Texture" id=2]
 [ext_resource path="res://assets/sfx/summer.ogg" type="AudioStream" id=3]
-[ext_resource path="res://assets/gfx/indicator.png" type="Texture" id=4]
 [ext_resource path="res://presets/player/player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://presets/player/Camera2D.gd" type="Script" id=6]
-[ext_resource path="res://presets/tower/Tower_Interior.gd" type="Script" id=7]
-[ext_resource path="res://scenes/Ladder.gd" type="Script" id=8]
+[ext_resource path="res://interractables/door/Door.tscn" type="PackedScene" id=7]
+[ext_resource path="res://presets/tower/Ladder.gd" type="Script" id=8]
 [ext_resource path="res://presets/tiles/tileset.tres" type="TileSet" id=9]
 [ext_resource path="res://assets/gfx/Controls/left.png" type="Texture" id=10]
 [ext_resource path="res://assets/gfx/Controls/left_pressed.png" type="Texture" id=11]
@@ -37,7 +36,7 @@ a = Vector2( -3.35291, -0.566551 )
 b = Vector2( -4.16711, 224.841 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 15.0169, 13.9082 )
+extents = Vector2( 12.173, 13.9082 )
 
 [node name="Node" type="Node2D"]
 position = Vector2( 0.286621, 0.0717906 )
@@ -75,10 +74,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Control" type="Sprite" parent="World"]
-visible = false
-z_index = 15
-texture = ExtResource( 4 )
+[node name="Control" type="Node2D" parent="World"]
 
 [node name="GUI" type="CanvasLayer" parent="World"]
 
@@ -166,63 +162,65 @@ __meta__ = {
 position = Vector2( 65.2466, -20.9991 )
 shape = SubResource( 2 )
 
-[node name="Tower_Interior" type="Sprite" parent="."]
+[node name="Background" type="Node2D" parent="."]
+
+[node name="Tower_Interior" type="Sprite" parent="Background"]
 position = Vector2( 117.713, 97.9282 )
 texture = ExtResource( 14 )
-script = ExtResource( 7 )
 
-[node name="Bedroom Limit" type="StaticBody2D" parent="Tower_Interior"]
+[node name="Door" parent="Background/Tower_Interior" instance=ExtResource( 7 )]
+position = Vector2( 122, 141 )
+home_indoors = "res://scenes/home.tscn"
+
+[node name="Bedroom Limit" type="StaticBody2D" parent="Background/Tower_Interior"]
 position = Vector2( 135.82, 61.664 )
 scale = Vector2( 1.02013, 1.06496 )
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Tower_Interior/Bedroom Limit"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/Tower_Interior/Bedroom Limit"]
 position = Vector2( 0.343613, 0 )
 build_mode = 1
 polygon = PoolVector2Array( 49.1025, -142.894, 43.9164, -142.894, 43.5098, -25.4907, -105.096, -25.4699, -105.167, -142.413, -110.178, -142.379, -109.811, -19.7781, 49.0578, -20.416 )
 
-[node name="Ladder" type="Area2D" parent="Tower_Interior"]
+[node name="Ladder" type="Area2D" parent="Background/Tower_Interior"]
+position = Vector2( -123, 0 )
+collision_layer = 2
+collision_mask = 2
 script = ExtResource( 8 )
-__meta__ = {
-"_edit_lock_": true
-}
 
-[node name="Top" type="CollisionShape2D" parent="Tower_Interior/Ladder"]
-position = Vector2( 165, 30.6559 )
+[node name="Top" type="CollisionShape2D" parent="Background/Tower_Interior/Ladder"]
+position = Vector2( 165.777, 30.6559 )
 shape = SubResource( 3 )
-__meta__ = {
-"_edit_lock_": true
-}
 
-[node name="SpawnPoint" type="Position2D" parent="Tower_Interior/Ladder/Top"]
+[node name="SpawnPoint" type="Position2D" parent="Background/Tower_Interior/Ladder/Top"]
 position = Vector2( 0, -39.6559 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Bottom" type="CollisionShape2D" parent="Tower_Interior/Ladder"]
-position = Vector2( 165, 165 )
+[node name="Bottom" type="CollisionShape2D" parent="Background/Tower_Interior/Ladder"]
+position = Vector2( 165.777, 165 )
 shape = SubResource( 3 )
-__meta__ = {
-"_edit_lock_": true
-}
 
-[node name="SpawnPoint" type="Position2D" parent="Tower_Interior/Ladder/Bottom"]
+[node name="SpawnPoint" type="Position2D" parent="Background/Tower_Interior/Ladder/Bottom"]
 position = Vector2( 0, -35 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="PlayerSpawnLoc" type="Position2D" parent="."]
-position = Vector2( 224.143, 219.106 )
+position = Vector2( 239.713, 229.928 )
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
 z_index = 10
+collision_layer = 3
+collision_mask = 3
 
 [node name="Camera" type="Camera2D" parent="Player"]
-position = Vector2( 0, -150 )
+position = Vector2( 0, -120 )
 current = true
 zoom = Vector2( 1.5, 1.5 )
 limit_left = -1260
@@ -260,5 +258,7 @@ collision_layer = 3
 collision_mask = 3
 format = 1
 tile_data = PoolIntArray( 655359, 1, 0, 589824, 1, 0, 589825, 1, 0, 589826, 1, 0, 589827, 1, 0, 589828, 1, 0, 589829, 1, 0, 589830, 1, 0, 589831, 1, 0, 589832, 1, 0, 589833, 1, 0 )
-[connection signal="body_shape_entered" from="Tower_Interior/Ladder" to="Tower_Interior/Ladder" method="_on_Ladder_body_shape_entered"]
-[connection signal="body_shape_exited" from="Tower_Interior/Ladder" to="Tower_Interior/Ladder" method="_on_Ladder_body_shape_exited"]
+[connection signal="body_entered" from="Background/Tower_Interior/Door" to="Background/Tower_Interior/Door" method="_on_Door_body_entered"]
+[connection signal="body_exited" from="Background/Tower_Interior/Door" to="Background/Tower_Interior/Door" method="_on_Door_body_exited"]
+[connection signal="body_shape_entered" from="Background/Tower_Interior/Ladder" to="Background/Tower_Interior/Ladder" method="_on_Ladder_body_shape_entered"]
+[connection signal="body_shape_exited" from="Background/Tower_Interior/Ladder" to="Background/Tower_Interior/Ladder" method="_on_Ladder_body_shape_exited"]
