@@ -5,7 +5,7 @@ signal scene_changed()
 onready var animation_player = $AnimationPlayer
 onready var back = $Control/Black
 
-func change_scene(path, delay = 0.5):
+func change_scene(path, delay = 0.2):
 	
 	# Enable fade animation.
 	yield(get_tree().create_timer(delay), "timeout")

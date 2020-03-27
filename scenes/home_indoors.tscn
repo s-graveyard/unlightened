@@ -169,7 +169,8 @@ position = Vector2( 117.713, 97.9282 )
 texture = ExtResource( 14 )
 
 [node name="Door" parent="Background/Tower_Interior" instance=ExtResource( 7 )]
-position = Vector2( 122, 141 )
+modulate = Color( 1, 1, 1, 0.392157 )
+position = Vector2( 122, 142 )
 home_indoors = "res://scenes/home.tscn"
 
 [node name="Bedroom Limit" type="StaticBody2D" parent="Background/Tower_Interior"]
@@ -212,7 +213,7 @@ __meta__ = {
 }
 
 [node name="PlayerSpawnLoc" type="Position2D" parent="."]
-position = Vector2( 239.713, 229.928 )
+position = Vector2( 239.713, 239.928 )
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
 z_index = 10

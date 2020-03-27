@@ -176,7 +176,7 @@ position = Vector2( 339.713, 99.9282 )
 texture = ExtResource( 10 )
 
 [node name="Door" parent="Background/Tower" instance=ExtResource( 19 )]
-position = Vector2( 134, 144 )
+position = Vector2( 133.501, 143.54 )
 home_indoors = "res://scenes/home_indoors.tscn"
 
 [node name="Tower2" type="Sprite" parent="Background"]
