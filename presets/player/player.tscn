@@ -1,44 +1,40 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://presets/player/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/gfx/player2.png" type="Texture" id=2]
-[ext_resource path="res://assets/sfx/jump_land.wav" type="AudioStream" id=3]
-[ext_resource path="res://assets/sfx/jump_l.wav" type="AudioStream" id=4]
-[ext_resource path="res://assets/sfx/pain_1.wav" type="AudioStream" id=5]
-[ext_resource path="res://assets/sfx/pain_2.wav" type="AudioStream" id=6]
-[ext_resource path="res://assets/sfx/jump_r.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/sfx/step_grass_l.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/sfx/step_grass_r.wav" type="AudioStream" id=9]
 [ext_resource path="res://assets/sfx/breathe.ogg" type="AudioStream" id=10]
 
 [sub_resource type="Animation" id=1]
-length = 5.3
+length = 3.5
 loop = true
+step = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 2.3, 5.3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 0, 0, 0 ]
+"times": PoolRealArray( 0, 3.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 0 ]
 }
 tracks/1/type = "audio"
 tracks/1/path = NodePath("../../Sound")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "clips": [ {
-"end_offset": 0.3,
-"start_offset": 0.3,
+"end_offset": 0.0,
+"start_offset": 0.0,
 "stream": ExtResource( 10 )
 } ],
-"times": PoolRealArray( 0.1 )
+"times": PoolRealArray( 0 )
 }
 
 [sub_resource type="Animation" id=2]
@@ -163,7 +159,7 @@ tracks/3/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 8.13984, 25.693 )
+extents = Vector2( 15.8576, 27.2783 )
 
 [node name="Node" type="KinematicBody2D" groups=[
 "group_player",
@@ -187,6 +183,7 @@ position = Vector2( -9.3068, 11.0226 )
 texture = ExtResource( 2 )
 vframes = 4
 hframes = 8
+frame = 23
 __meta__ = {
 "_edit_lock_": true
 }
@@ -202,37 +199,12 @@ blend_times = [ "Move", "Move", 1.0 ]
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=[
 "group_player",
 ]]
-position = Vector2( -2.12236, 2.7513 )
+position = Vector2( -2.89503, 4.4337 )
 shape = SubResource( 4 )
 
-[node name="JumpLand" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 3 )
-volume_db = -20.0
-pitch_scale = 0.5
-attenuation = 3.03143
-
-[node name="JumpLeft" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 4 )
-volume_db = -20.0
-attenuation = 3.03143
-
-[node name="Pain1" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 5 )
-volume_db = -20.0
-attenuation = 3.03143
-
-[node name="Pain2" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 6 )
-volume_db = -20.0
-attenuation = 3.03143
-
-[node name="JumpRight" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 7 )
-volume_db = -20.0
-attenuation = 3.03143
-
 [node name="Sound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 10 )
-volume_db = -10.0
+stream = ExtResource( 9 )
+volume_db = -15.0
+pitch_scale = 0.8
 max_distance = 500.0
 attenuation = 0.659753

@@ -21,7 +21,7 @@ func _physics_process(delta):
 		for tinge in current_body:
 			if(tinge.is_in_group("group_player")):
 				
-				if Input.is_action_just_pressed("ui_up"):
+				if Input.is_action_just_pressed("ui_select"):
 					interact = true
 				
 				if(tinge.get_global_position().x < self.get_global_position().x - 16):
@@ -43,9 +43,11 @@ func _physics_process(delta):
 
 func _on_Area2D_body_shape_entered(body_id, body, body_shape, area_shape):
 	if(body.is_in_group("group_player")):
-		emit_signal("control", 'e', true, position)
+		var new_position = global_position
+		new_position.y -= 25
+		emit_signal("control", true, new_position)
 		
 func _on_Area2D_body_shape_exited(body_id, body, body_shape, area_shape):
 	if(body.is_in_group("group_player")):
 		interact = false
-		emit_signal("control", 'e', false, position)
+		emit_signal("control", false, Vector2(0,0))

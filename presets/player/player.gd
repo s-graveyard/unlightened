@@ -1,7 +1,6 @@
 extends KinematicBody2D
 
 signal player_state(grounded) 
-signal throw_item
 
 var input_direction = 0
 var direction = 1
@@ -24,17 +23,6 @@ func _animation(delta):
 	if anim_next != anim_current:
 		anim_current = anim_next
 		$Body/Sprite.get_node("anim").play(anim_next)
-
-#const step_musics = ["StepGrassLeft","StepGrassRight"]
-#func play_walk():
-#	var random_walk = get_node(step_musics[randi() % 2])
-#	if grounded && not random_walk.is_playing():
-#		random_walk.play()
-
-const damage_musics = ["Pain1","Pain2"]
-func got_damage():
-	var random_damage = get_node(damage_musics[randi() % 2])
-	random_damage.play()
 
 func _physics_process(delta):
 	

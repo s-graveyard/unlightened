@@ -12,7 +12,6 @@ const MAX_FALL_SPEED = 300
 
 # Sound
 var enable_ambience = true
-var enable_music = true
 
 # Graphics
-var enable_shader = false
+var enable_shader = true
