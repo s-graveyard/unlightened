@@ -1,10 +1,12 @@
 extends KinematicBody2D
 
 signal control
+signal control_select
 
 var current_node
 var direction = 1
 var animation
+var msg = game.cat_dialogue
 
 var interact = false
 
@@ -12,6 +14,9 @@ func _ready():
 	set_process(true)
 	current_node = get_node("Sprite")
 	animation = $Sprite.get_node("anim")
+	
+	if not game.enable_sound:
+		$Cry.stream_paused = true
 
 func _physics_process(delta):
 	# Follow player when inside hit area.
@@ -39,6 +44,7 @@ func _physics_process(delta):
 			animation.play("idle")
 		else:
 			animation.play("stretch")
+			emit_signal("control_select", null, msg[randi() % msg.size()])
 			interact = false
 
 func _on_Area2D_body_shape_entered(body_id, body, body_shape, area_shape):

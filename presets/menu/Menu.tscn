@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://presets/dialogue/Font.tres" type="DynamicFont" id=1]
+
+[node name="Menu" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -60.0
+margin_top = -21.0
+margin_right = 60.0
+margin_bottom = 21.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -86.6637
+margin_top = -21.6797
+margin_right = 86.6637
+margin_bottom = 21.6797
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/normal_font = ExtResource( 1 )
+text = "Thank you for playing."
+__meta__ = {
+"_edit_use_anchors_": false
+}

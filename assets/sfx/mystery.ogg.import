@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/mystery.ogg-163b4a53f852f86f5a2934a2f8bfb901.oggstr"
+
+[deps]
+
+source_file="res://assets/sfx/mystery.ogg"
+dest_files=[ "res://.import/mystery.ogg-163b4a53f852f86f5a2934a2f8bfb901.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

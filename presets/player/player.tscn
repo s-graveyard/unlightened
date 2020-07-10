@@ -1,12 +1,30 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://presets/player/player.gd" type="Script" id=1]
-[ext_resource path="res://assets/gfx/player2.png" type="Texture" id=2]
+[ext_resource path="res://presets/player/PlayerStateMachine.gd" type="Script" id=1]
+[ext_resource path="res://assets/gfx/player1.png" type="Texture" id=2]
+[ext_resource path="res://presets/player/PlayerController.gd" type="Script" id=3]
 [ext_resource path="res://assets/sfx/step_grass_l.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/sfx/step_grass_r.wav" type="AudioStream" id=9]
 [ext_resource path="res://assets/sfx/breathe.ogg" type="AudioStream" id=10]
 
 [sub_resource type="Animation" id=1]
+resource_name = "Fall"
+length = 0.8
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 24, 25, 26, 27 ]
+}
+
+[sub_resource type="Animation" id=2]
 length = 3.5
 loop = true
 step = 0.5
@@ -27,7 +45,7 @@ tracks/1/path = NodePath("../../Sound")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = false
+tracks/1/enabled = true
 tracks/1/keys = {
 "clips": [ {
 "end_offset": 0.0,
@@ -37,7 +55,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 )
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -99,8 +117,7 @@ tracks/3/keys = {
 "values": [ -20.0, -20.0 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "Run"
+[sub_resource type="Animation" id=4]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -158,7 +175,10 @@ tracks/3/keys = {
 "values": [ -15.0, -15.0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="OccluderPolygon2D" id=6]
+polygon = PoolVector2Array( -10, 62.0444, 5.66277, 61.9378, 6.21179, 18.3133, 2.10988, 18.116, 1.59746, 8.32298, -4.15787, 8.11362, -4.32389, 17.5466, -10.0227, 19.7157 )
+
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 15.8576, 27.2783 )
 
 [node name="Node" type="KinematicBody2D" groups=[
@@ -166,10 +186,13 @@ extents = Vector2( 15.8576, 27.2783 )
 ]]
 collision_layer = 0
 collision_mask = 0
-script = ExtResource( 1 )
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="StateMachine" type="Node2D" parent="."]
+script = ExtResource( 1 )
 
 [node name="SpawnPosition" type="Position2D" parent="." groups=[
 "Tiles",
@@ -191,17 +214,22 @@ __meta__ = {
 
 [node name="anim" type="AnimationPlayer" parent="Body/Sprite"]
 autoplay = "Idle"
-anims/Idle = SubResource( 1 )
-anims/Move = SubResource( 2 )
-anims/Run = SubResource( 3 )
+anims/Fall = SubResource( 1 )
+anims/Idle = SubResource( 2 )
+anims/Move = SubResource( 3 )
+anims/Run = SubResource( 4 )
 next/Idle = "Idle"
 blend_times = [ "Move", "Move", 1.0 ]
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Body"]
+position = Vector2( 0, -30 )
+occluder = SubResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=[
 "group_player",
 ]]
 position = Vector2( -2.89503, 4.4337 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="."]
 volume_db = -15.0

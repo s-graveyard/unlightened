@@ -1,0 +1,199 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://scenes/presets/Ladder.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/gfx/kettle.png" type="Texture" id=2]
+[ext_resource path="res://main/scene.gd" type="Script" id=3]
+[ext_resource path="res://presets/player/Camera2D.gd" type="Script" id=4]
+[ext_resource path="res://assets/gfx/indoor.png" type="Texture" id=5]
+[ext_resource path="res://interractables/door/Door.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/presets/World.tscn" type="PackedScene" id=7]
+[ext_resource path="res://presets/player/player.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/gfx/ray.png" type="Texture" id=9]
+[ext_resource path="res://scenes/gradient/light_canvas.tres" type="Material" id=10]
+[ext_resource path="res://presets/collectables/Collectables.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/gfx/background/day.png" type="Texture" id=12]
+
+[sub_resource type="OccluderPolygon2D" id=1]
+polygon = PoolVector2Array( -161.287, 138.928, 159.713, 137.928, 159.713, -138.072, 65.7134, -138.072, -0.286621, -139.072, 0.713379, -85.0718, 47.7134, -5.07179, 1.71338, -5.07179, -158.287, -4.07179, -159.287, 62.9282, -96.2866, 136.928 )
+
+[sub_resource type="SegmentShape2D" id=2]
+a = Vector2( -3.35291, -0.566551 )
+b = Vector2( -4.16711, 224.841 )
+
+[node name="Node" type="Node2D"]
+position = Vector2( 0.286621, 0.0717906 )
+script = ExtResource( 3 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+rect = Rect2( 0, 0, 512, 300 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="World" parent="." instance=ExtResource( 7 )]
+position = Vector2( -0.045929, -0.384109 )
+
+[node name="Player" parent="." instance=ExtResource( 8 )]
+z_index = 10
+collision_layer = 3
+collision_mask = 3
+
+[node name="Camera" type="Camera2D" parent="Player"]
+position = Vector2( 0, -40 )
+current = true
+zoom = Vector2( 0.5, 0.5 )
+process_mode = 0
+limit_left = -1260
+limit_right = 930
+limit_bottom = 650
+limit_smoothed = true
+smoothing_enabled = true
+drag_margin_left = 0.05
+drag_margin_top = 0.5
+drag_margin_right = 0.05
+editor_draw_limits = true
+editor_draw_drag_margin = true
+script = ExtResource( 4 )
+max_roll = 0.0
+
+[node name="Tween" type="Tween" parent="Player/Camera"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="Light2D" type="Sprite" parent="Background"]
+position = Vector2( 92.2134, -78.0718 )
+scale = Vector2( 0.121875, 0.225 )
+texture = ExtResource( 12 )
+
+[node name="Light2D2" type="Sprite" parent="Background"]
+position = Vector2( -80.2866, 103.928 )
+scale = Vector2( 0.08125, 0.0666667 )
+texture = ExtResource( 12 )
+
+[node name="Indoors" type="Sprite" parent="Background"]
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Background/Indoors"]
+occluder = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Limit" type="Node2D" parent="Background/Indoors"]
+position = Vector2( -143, -142 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Limit" type="StaticBody2D" parent="Background/Indoors/Limit" groups=[
+"group_ground",
+]]
+position = Vector2( -80.2866, 109.928 )
+scale = Vector2( 1.02013, 1.06496 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/Indoors/Limit/Limit"]
+position = Vector2( 65.2466, -20.9991 )
+shape = SubResource( 2 )
+
+[node name="Limit2" type="StaticBody2D" parent="Background/Indoors/Limit" groups=[
+"group_ground",
+]]
+position = Vector2( 239.713, 109.928 )
+scale = Vector2( 1.02013, 1.06496 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/Indoors/Limit/Limit2"]
+position = Vector2( 65.2466, -20.9991 )
+shape = SubResource( 2 )
+
+[node name="Bedroom" type="StaticBody2D" parent="Background/Indoors/Limit"]
+position = Vector2( 255.533, 161.592 )
+scale = Vector2( 1.02013, 1.06496 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/Indoors/Limit/Bedroom"]
+position = Vector2( 0.343613, -6.57302 )
+build_mode = 1
+polygon = PoolVector2Array( 44.9255, -132.084, 43.9452, -132.084, 43.9452, -18.4643, -106.036, -18.4643, -106.036, -133.962, -107.016, -133.962, -107.016, -16.5863, 44.9255, -16.5863 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Floor" type="StaticBody2D" parent="Background/Indoors/Limit"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/Indoors/Limit/Floor"]
+position = Vector2( 0, -1.07179 )
+polygon = PoolVector2Array( -20.2866, 279.928, 309.713, 279.928, 309.713, 289.928, -20.2866, 289.928 )
+
+[node name="Collectables" parent="Background/Indoors" instance=ExtResource( 11 )]
+position = Vector2( 135.713, -19.0718 )
+collectable_key = "basement_key"
+
+[node name="ray" type="Sprite" parent="Background/Indoors"]
+visible = false
+modulate = Color( 1, 0.945098, 0.505882, 0.784314 )
+material = ExtResource( 10 )
+position = Vector2( -80.913, 78.666 )
+z_index = 15
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ray2" type="Sprite" parent="Background/Indoors"]
+visible = false
+modulate = Color( 1, 0.945098, 0.505882, 0.784314 )
+material = ExtResource( 10 )
+position = Vector2( 31.624, -59.5651 )
+scale = Vector2( 0.896683, 0.896683 )
+z_index = 15
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ray3" type="Sprite" parent="Background/Indoors"]
+visible = false
+modulate = Color( 1, 0.945098, 0.505882, 0.784314 )
+material = ExtResource( 10 )
+position = Vector2( 129.404, -58.9868 )
+scale = Vector2( 0.896683, 0.896683 )
+z_index = 15
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Door" parent="Background/Indoors" instance=ExtResource( 6 )]
+modulate = Color( 1, 1, 1, 0.392157 )
+position = Vector2( 100, 100 )
+nextscene = "outdoors"
+
+[node name="Door2" parent="Background/Indoors" instance=ExtResource( 6 )]
+position = Vector2( -138, 100 )
+nextscene = "basement"
+
+[node name="Ladder" parent="Background/Indoors" instance=ExtResource( 1 )]
+position = Vector2( 20.713, 64.928 )
+
+[node name="kettle" type="Sprite" parent="Background/Indoors"]
+position = Vector2( 55, 94.5 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PlayerSpawnLoc" type="Position2D" parent="."]
+position = Vector2( 100, 100 )

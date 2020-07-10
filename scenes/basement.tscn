@@ -1,0 +1,142 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://presets/killswitch/KillSwitch.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/gfx/broken_ladder.png" type="Texture" id=2]
+[ext_resource path="res://main/scene.gd" type="Script" id=3]
+[ext_resource path="res://presets/player/Camera2D.gd" type="Script" id=4]
+[ext_resource path="res://assets/gfx/basement.png" type="Texture" id=5]
+[ext_resource path="res://assets/gfx/basement_light.png" type="Texture" id=6]
+[ext_resource path="res://scenes/presets/World.tscn" type="PackedScene" id=7]
+[ext_resource path="res://presets/player/player.tscn" type="PackedScene" id=8]
+[ext_resource path="res://presets/lights/ray.tscn" type="PackedScene" id=11]
+
+[sub_resource type="OccluderPolygon2D" id=1]
+polygon = PoolVector2Array( -170.287, 80.1662, 169.713, 80.1662, 169.713, -79.8338, -170.287, -79.8338 )
+
+[sub_resource type="SegmentShape2D" id=2]
+a = Vector2( -3.35291, -0.566551 )
+b = Vector2( -4.16711, 224.841 )
+
+[node name="Node" type="Node2D"]
+position = Vector2( 0.286621, 0.0717906 )
+script = ExtResource( 3 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+rect = Rect2( 0, 0, 512, 300 )
+process_parent = true
+physics_process_parent = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="World" parent="." instance=ExtResource( 7 )]
+position = Vector2( 9.71338, 10.4763 )
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="Basement" type="Sprite" parent="Background"]
+modulate = Color( 0.431373, 0.431373, 0.431373, 1 )
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Background/Basement"]
+position = Vector2( 0, -0.237946 )
+occluder = SubResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ladder" type="Sprite" parent="Background/Basement"]
+modulate = Color( 0.682353, 0.682353, 0.682353, 0.784314 )
+position = Vector2( -142, -35.5 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Limit" type="Node2D" parent="Background/Basement"]
+position = Vector2( -119.713, -99.9282 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Limit" type="StaticBody2D" parent="Background/Basement/Limit" groups=[
+"group_ground",
+]]
+position = Vector2( 283.713, 27.9282 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/Basement/Limit/Limit"]
+shape = SubResource( 2 )
+
+[node name="Limit2" type="StaticBody2D" parent="Background/Basement/Limit" groups=[
+"group_ground",
+]]
+position = Vector2( -37, 27 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/Basement/Limit/Limit2"]
+shape = SubResource( 2 )
+
+[node name="Floor" type="StaticBody2D" parent="Background/Basement/Limit"]
+position = Vector2( 0, 199 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/Basement/Limit/Floor"]
+polygon = PoolVector2Array( -40.5736, -30.1436, 279.426, -30.1436, 279.426, -20.1436, -40.5736, -20.1436 )
+
+[node name="basement_light" type="Sprite" parent="Background/Basement"]
+position = Vector2( -68.2858, -56.9951 )
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ray" parent="Background/Basement/basement_light" instance=ExtResource( 11 )]
+
+[node name="basement_light2" type="Sprite" parent="Background/Basement"]
+position = Vector2( 71.7142, -56.9951 )
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ray2" parent="Background/Basement/basement_light2" instance=ExtResource( 11 )]
+position = Vector2( 0.0330505, 68.4036 )
+
+[node name="KillSwitch" parent="Background/Basement" instance=ExtResource( 1 )]
+position = Vector2( 74.4511, 70 )
+
+[node name="PlayerSpawnLoc" type="Position2D" parent="."]
+position = Vector2( -140, 30 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Player" parent="." instance=ExtResource( 8 )]
+z_index = 10
+collision_layer = 3
+collision_mask = 3
+
+[node name="Camera" type="Camera2D" parent="Player"]
+position = Vector2( 0, -40 )
+current = true
+zoom = Vector2( 0.5, 0.5 )
+process_mode = 0
+limit_left = -1260
+limit_right = 930
+limit_bottom = 650
+limit_smoothed = true
+smoothing_enabled = true
+drag_margin_left = 0.05
+drag_margin_top = 0.5
+drag_margin_right = 0.05
+editor_draw_limits = true
+editor_draw_drag_margin = true
+script = ExtResource( 4 )
+max_roll = 0.0
+
+[node name="Tween" type="Tween" parent="Player/Camera"]
